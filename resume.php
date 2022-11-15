@@ -56,8 +56,7 @@ class Resume {
         'Ockham`s Razor' => ['Entities should not be multiplied beyond necessity' => $lates[9]],
         'TRIZ' => ['The methodology of the ideal solution' => $lates[10]],
         ];
-        $this->prods = !empty($this->prods) ? $this->prods : 
-        //['https://striga.me' => ['WordPress' => 1]];
+        $this->prods = !empty($this->prods) ? $this->prods : ['https://striga.me' => ['WordPress' => 1], ''=>'...'];
     }
     
 public function the(array $in=[]):?string{if(empty($in) or !is_array($in)){return null;}$ret='';for($i=0,$c=count($in);$i<$c;$i++){$ret .= mb_chr($in[$i], "UTF-8");}return $ret;}   
