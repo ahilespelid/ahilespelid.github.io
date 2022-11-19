@@ -14,7 +14,7 @@ class Resume {
         array $skills = [],
         array $educs = [],
         array $lates = [],
-        array $prods = [],
+        array $jobs = [],
         array $hobby = []
     ){
     $lates[0] = $this->the([1053,1077,32,1087,1086,1074,1090,1086,1088,1103,1102,32,1082,1086,1076,44,32,1072,32,1087,1077,1088,1077,1080,1089,1087,1086,1083,1100,1079,1091,1102,32,1087,1086,32,1084,1077,1088,1077,32,1085,1077,1086,1073,1093,1086,1076,1080,1084,1086,1089,1090,1080,46,32,1040,1082,1090,1080,1074,1085,1086,32,1080,1089,1087,1086,1083,1100,1079,1091,1102,32,1073,1080,1073,1083,1080,1086,1090,1077,1082,1080,32,113,116,44,32,99,111,109,112,111,115,101,114,44,32,110,112,109,46]);
@@ -56,7 +56,19 @@ class Resume {
         'Ockham`s Razor' => ['Entities should not be multiplied beyond necessity' => $lates[9]],
         'TRIZ' => ['The methodology of the ideal solution' => $lates[10]],
         ];
-        $this->prods = !empty($this->prods) ? $this->prods : ['https://striga.me' => ['WordPress' => 1], ''=>'...'];
+        $this->jobs = !empty($this->jobs) ? $this->jobs : [
+            'https://striga.me' => ['WordPress' => 3],
+            'https://skidkimira.ru' => ['CodeIgniter' => 0],
+            'https://triz-ri.com' => ['SiteOS' => 12],
+            'https://apply-marine.ru/' => ['ModX' => 1],
+            'https://linguachain.ru/' => ['WordPress' => 1],
+            'https://wozy.ru/' => ['WordPress' => 4],
+            'https://art-green.ru/' => ['Bitrix' => 12],
+            'http://194.67.90.250/' => ['PHP 8.1' => 4],
+            'https://striga.me' => ['WordPress' => 1],
+            'https://striga.me' => ['WordPress' => 1],
+            'https://striga.me' => ['WordPress' => 1],
+            'https://striga.me' => ['WordPress' => 1], '...'=>'...'];
     }
     
 public function the(array $in=[]):?string{if(empty($in) or !is_array($in)){return null;}$ret='';for($i=0,$c=count($in);$i<$c;$i++){$ret .= mb_chr($in[$i], "UTF-8");}return $ret;}   
