@@ -66,9 +66,7 @@ class Resume {
             'https://art-green.ru/' => ['Bitrix' => 12],
             'http://194.67.90.250/' => ['PHP 8.1' => 4],
             'https://striga.me' => ['WordPress' => 1],
-            'https://striga.me' => ['WordPress' => 1],
-            'https://striga.me' => ['WordPress' => 1],
-            'https://striga.me' => ['WordPress' => 1], '...'=>'...'];
+            '...'=>'...'];
     }
     
 public function the(array $in=[]):?string{if(empty($in) or !is_array($in)){return null;}$ret='';for($i=0,$c=count($in);$i<$c;$i++){$ret .= mb_chr($in[$i], "UTF-8");}return $ret;}   
