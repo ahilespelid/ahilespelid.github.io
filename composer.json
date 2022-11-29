@@ -1,0 +1,29 @@
+{
+    "name": "abie/resume",
+    "description": "This is resume list first devoloper abie intelect",
+    "type": "project",
+  "require": {
+    "php": ">=8.1.0",
+    "ext-pdo": "*",
+    "phpoffice/phpspreadsheet": "^1.23"
+  },
+    "license": "GNU",
+    "autoload": {
+      "files": [
+        "fun/pa.php",
+        "fun/pn.php",
+        "fun/po.php",
+        "fun/is_date.php"
+      ],
+      "psr-4": {
+        "Abie\\": "app/"
+      }
+  },
+    "authors": [
+        {
+            "name": "Ahi Les",
+            "email": "ahilespelid@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

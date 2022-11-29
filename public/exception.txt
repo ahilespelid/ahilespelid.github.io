@@ -1,0 +1,57 @@
+2022-11-29 18:34:44 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\auto load.php 
+C:\Project\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:35:51 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\auto load.php 
+C:\Project\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:36:43 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\auto load.php 
+C:\Project\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:37:40 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\auto load.php 
+C:\Project\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:41:58 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\auto load.php 
+C:\Project\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:42:38 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\auto load.php 
+C:\Project\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:54:37 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:55:26 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:55:50 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:56:39 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:57:36 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 18:57:47 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 19:01:04 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 19:01:19 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 19:01:32 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 19:01:48 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 19:02:12 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 19:02:26 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\auto load.php 
+Z:\OpenServer\domains\resume\public\index.php:10
+
+2022-11-29 20:34:17 Composer autoload file not found: Z:/OpenServer/domains/resume\vendor\autoload.php 
+Z:\OpenServer\domains\resume\public\index.php:11
+
