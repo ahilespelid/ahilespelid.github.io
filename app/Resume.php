@@ -72,8 +72,8 @@ class Resume {
             'http://194.67.90.250/' => ['PHP 8.1' => 4],
             'https://striga.me' => ['WordPress' => 1],
             '...'=>'...'];
-        $this->file = (file_exists($dir = realpath($_SERVER['DOCUMENT_ROOT']).DS.'files')) ? $dir : 
-            (mkdir($dir,777) ? $dir : '').DS.'resume.xlsx';
+        $this->file = (is_writable($dir = realpath($_SERVER['DOCUMENT_ROOT']).DS.'files')) ? $dir.DS.'resume.xlsx' : 
+            (mkdir($dir,777) ? $dir.DS : '').'resume.xlsx';
         $this->get = '<a href='.$_SERVER['PHP_SELF'].'?'.$this->setHash().'[doc]=exel>Запросить файл</a>';
     }
     
@@ -100,5 +100,6 @@ public function write():bool{
     $sheet->getStyle('F1:Z16')->applyFromArray(['font'=>['color'=>['rgb' => '255,50,50'],'bold' => true,'size' => 11],'fill'=>['fillType' => Fill::FILL_SOLID,'startColor' => ['rgb' => '50,100,100']]]); 
     $sheet->fromArray($exel, NULL, 'F1'); $spreadsheet->removeSheetByIndex(0); ///*/ $spreadsheet->setActiveSheetIndex(1); ///*/
     return ((new Xlsx($spreadsheet))->save($this->file)) ? true : false;
-    }    
+    }
+    public function __set(string $name, mixed $value): void {$this->{$name} = $value;}
 }

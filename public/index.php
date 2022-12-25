@@ -1,5 +1,5 @@
 <?php
-setlocale(LC_ALL, 'ru_RU.utf8'); header('Content-type: text/html; charset=utf-8');define('DS',DIRECTORY_SEPARATOR);
+setlocale(LC_ALL, 'ru_RU.utf8'); error_reporting(E_ALL & ~E_DEPRECATED); header('Content-type: text/html; charset=utf-8');define('DS',DIRECTORY_SEPARATOR);
 
 function glob_tree_search($path, $pattern, $_base_path = null){$ret = []; $_base_path = (is_null($_base_path)) ? '' : $_base_path.($path).DS; 
     foreach(glob($path.DS.$pattern, GLOB_BRACE) as $file){$ret[] = $_base_path.($file);}
