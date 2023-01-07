@@ -62,15 +62,17 @@ class Resume {
         'TRIZ' => ['The methodology of the ideal solution' => $lates[10]],
         ];
         $this->jobs = !empty($this->jobs) ? $this->jobs : [
-            'https://striga.me' => ['WordPress' => 3],
-            'https://skidkimira.ru' => ['CodeIgniter' => 0],
-            'https://triz-ri.com' => ['SiteOS' => 12],
+            'https://striga.me/' => ['WordPress' => 3],
+            'https://skidkimira.ru/' => ['CodeIgniter' => 0],
+            'https://triz-ri.com/' => ['SiteOS' => 12],
             'https://apply-marine.ru/' => ['ModX' => 1],
             'https://linguachain.ru/' => ['WordPress' => 1],
             'https://wozy.ru/' => ['WordPress' => 4],
             'https://art-green.ru/' => ['Bitrix' => 12],
+            'https://portal.robotcarwash.ru/' => ['Bitrix' => 0],
             'http://194.67.90.250/' => ['PHP 8.1' => 4],
-            'https://striga.me' => ['WordPress' => 1],
+            'https://striga.me/' => ['WordPress' => 1],
+            'https://iosmods.ru/' => ['PHP 8.2' => 1],
             '...'=>'...'];
         $this->file = (is_writable($dir = realpath($_SERVER['DOCUMENT_ROOT']).DS.'files')) ? $dir.DS.'resume.xlsx' : 
             (mkdir($dir,777) ? $dir.DS : '').'resume.xlsx';

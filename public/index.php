@@ -27,11 +27,13 @@ catch(\Exception $e){
 }
 ///*/
 $resume = new Abie\Resume;
-$resume->run()?->write();
-///*/ pa($_SERVER);
-
 if($get = ($_REQUEST[$resume->hash] ?? false)){
+    if(function_exists('send_file_apache')){send_file_apache($resume->file);}
     if(function_exists('pa')){pa($get);}
     echo $resume->file;
 }
 ///*/
+$resume->run()?->write();
+///*/ 
+pa($_SERVER);
+pa(__DIR__);

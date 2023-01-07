@@ -13,6 +13,7 @@
         "fun/pa.php",
         "fun/pn.php",
         "fun/po.php",
+        "fun/send_file_apache.php",
         "fun/is_date.php"
       ],
       "psr-4": {

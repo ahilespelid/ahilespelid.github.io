@@ -181,3 +181,5 @@ Z:\OpenServer\domains\resume\public\index.php:11
 2022-12-25 17:53:35 Composer autoload file not found: /vendor/autoload.php 
 /var/www/u1874689/data/www/ahilespelid.ru/public/index.php:11
 
+2022-12-25 18:44:42 Composer autoload file not found: C:/Project/OpenServer/domains/resume\vendor\autoload.php 
+C:\Project\OpenServer\domains\resume\public\index.php:11
