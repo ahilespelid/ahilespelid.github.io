@@ -33,7 +33,5 @@ if($get = ($_REQUEST[$resume->hash] ?? false)){
     echo $resume->file;
 }
 ///*/
-$resume->run()?->write();
+$resume->render()?->run()?->write();
 ///*/ 
-pa($_SERVER);
-pa(__DIR__);

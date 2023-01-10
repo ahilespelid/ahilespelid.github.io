@@ -80,7 +80,7 @@ class Resume {
     }
     
 public function the(array $in=[]):?string{if(empty($in) or !is_array($in)){return null;}$ret='';for($i=0,$c=count($in);$i<$c;$i++){$ret .= mb_chr($in[$i], "UTF-8");}return $ret;}   
-public function run():?object{if(function_exists('pa')){pa(new Resume);return $this;}return null;}    
+public function run():?object{/*/// if(function_exists('pa')){pa(new Resume);return $this;}///*/ return null;}    
 public function setHash():?string{
     if(empty($this->hash)){
         $hash = uniqid('id'); if(setcookie('hash', $hash, time()+(!empty($this->hashTime) ? $this->hashTime : 30))) $this->hash = $hash;
@@ -103,5 +103,14 @@ public function write():bool{
     $sheet->fromArray($exel, NULL, 'F1'); $spreadsheet->removeSheetByIndex(0); ///*/ $spreadsheet->setActiveSheetIndex(1); ///*/
     return ((new Xlsx($spreadsheet))->save($this->file)) ? true : false;
     }
-    public function __set(string $name, mixed $value): void {$this->{$name} = $value;}
+    public function render(array $data = [], string $view = 'tree'):?object{
+        $view = str_replace(['?', '\\', '/', ':', '"', '*', '>', '<', '|'], '',$view);
+        $view = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.$view.DIRECTORY_SEPARATOR.'index.php';
+
+        if(is_readable($view)){
+            extract($data, EXTR_SKIP); require $view; return $this;
+        } else {throw new \Exception("Файл на вид по пути '$view' не найден.");}
+        return null;
+    }
+    public function __set(string $name, mixed $value):void {$this->{$name} = $value;}
 }
