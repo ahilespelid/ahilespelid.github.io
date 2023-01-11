@@ -4,6 +4,7 @@ node_modules/
 
 # macOS
 .DS_Store
+composer.lock
 
 /vendor/
 /public/exception.txt
