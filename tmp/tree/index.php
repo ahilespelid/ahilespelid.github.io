@@ -71,7 +71,6 @@ for(var line=1; line<height; line++){
     for(var i=1;i<width;i++){var s = (Math.floor((Math.random()*2)%2)) ? "╱" : "╲"; tag.appendChild(document.createTextNode(s));} 
     tag.appendChild(document.createElement('br'));
 }}
-
 document.addEventListener('DOMContentLoaded', function(){
     let w = window.innerWidth / 16.3;
     lab(document.getElementById('head'), 20, w); lab(document.getElementById('foot'), 20, w);
