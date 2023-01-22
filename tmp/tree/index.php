@@ -62,21 +62,28 @@ span[class^="arrow"]{position:absolute; display:inline-block; width:0; height:0;
 .bubble9 {height:225px; width:250px; top: 870px; left:280px; padding:3px 5px;}
 footer, header {text-align: center;} footer {color:#00f;} header {color:#f00;} a{text-decoration: none;}
 </style>
-<?if('computer' == $device){?>
 <script type="text/javascript">
-function lab(tag, height=5, width=5){
-    if(null == tag && height<0 && width<0) return false; console.log(tag); 
+function lab(tag, sym=1, height=5, width=5){
+    if(null == tag && height<0 && width<0) return false; //console.log(width); 
     tag.innerHTML = ''; tag.style.lineHeight = '16px';
-for(var line=1; line<height; line++){
-    for(var i=1;i<width;i++){var s = (Math.floor((Math.random()*2)%2)) ? "╱" : "╲"; tag.appendChild(document.createTextNode(s));} 
+for(var line=1; line<height; line++){ //console.log(Math.round((width/2))); 
+    for(var i=1;i<width;i++){
+        if(sym){var s = (Math.round((height/2)) == line && Math.round((width/2)) == i) ? '()' :
+                                     (Math.round((height/2)) == line && Math.round((width/2)) != i) ? '—' : 
+                                     (Math.round((width/2)) == i && Math.round((height/2)) != line) ? ' | ' : (Math.floor((Math.random()*2)%2)) ? "╱" : "╲";
+        }else{var s = (Math.round((width/2)) == i && Math.round((height/2)) == line) ? ' + ' : (Math.floor((Math.random()*2)%2)) ? "╱" : "╲";} 
+    tag.appendChild(document.createTextNode(s));} 
     tag.appendChild(document.createElement('br'));
 }}
 document.addEventListener('DOMContentLoaded', function(){
-    let w = window.innerWidth / 16.3;
-    lab(document.getElementById('head'), 20, w); lab(document.getElementById('foot'), 20, w);
+    let w = window.innerWidth / 16.3, head = document.getElementById('head'), foot = document.getElementById('foot');
+    <?if('computer' == $device){?>
+        lab(head, 0, 20, w); lab(foot, 1, 20, w);
+        window.addEventListener("resize", (event) => {let w = window.innerWidth / 16.3; lab(head, 20, w); lab(foot, 20, w);});
+    <?}else{?>head.innerHTML='<br><br><br><br><br><br><br><br><br><br>'<?}?>
 });
-window.addEventListener("resize", (event) => {let w = window.innerWidth / 16.3; console.log(w); lab(document.getElementById('head'), 20, w); lab(document.getElementById('foot'), 20, w);});
-</script><?}?>
+<?if('computer' == $device){?><?}?>
+</script>
 </head>
 <body>
 <header id="head"></header>
