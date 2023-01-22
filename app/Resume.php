@@ -148,6 +148,7 @@ public function write():bool{
         $view = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.$view.DIRECTORY_SEPARATOR.'index.php';
 
         if(is_readable($view)){
+            $detect = new \Detection\MobileDetect; $data['device'] = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
             extract($data, EXTR_SKIP); require $view; return $this;
         } else {throw new \Exception("Файл на вид по пути '$view' не найден.");}
         return null;

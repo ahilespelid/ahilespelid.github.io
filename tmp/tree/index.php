@@ -62,6 +62,7 @@ span[class^="arrow"]{position:absolute; display:inline-block; width:0; height:0;
 .bubble9 {height:225px; width:250px; top: 870px; left:280px; padding:3px 5px;}
 footer, header {text-align: center;} footer {color:#00f;} header {color:#f00;} a{text-decoration: none;}
 </style>
+<?if('computer' == $device){?>
 <script type="text/javascript">
 function lab(tag, height=5, width=5){
     if(null == tag && height<0 && width<0) return false; console.log(tag); 
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function(){
     lab(document.getElementById('head'), 20, w); lab(document.getElementById('foot'), 20, w);
 });
 window.addEventListener("resize", (event) => {let w = window.innerWidth / 16.3; console.log(w); lab(document.getElementById('head'), 20, w); lab(document.getElementById('foot'), 20, w);});
-</script>
+</script><?}?>
 </head>
 <body>
 <header id="head"></header>
