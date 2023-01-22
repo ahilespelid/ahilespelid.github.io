@@ -68,9 +68,9 @@ function lab(tag, sym=1, height=5, width=5){
     tag.innerHTML = ''; tag.style.lineHeight = '16px';
 for(var line=1; line<height; line++){ //console.log(Math.round((width/2))); 
     for(var i=1;i<width;i++){
-        if(sym){var s = (Math.round((height/2)) == line && Math.round((width/2)) == i) ? '()' :
-                                     (Math.round((height/2)) == line && Math.round((width/2)) != i) ? '—' : 
-                                     (Math.round((width/2)) == i && Math.round((height/2)) != line) ? ' | ' : (Math.floor((Math.random()*2)%2)) ? "╱" : "╲";
+        if(sym){var s = (Math.round((height/2)) == line && Math.round((width/2)) == i) ? ' + ' :
+                                     (Math.round((height/2)) == line && Math.round((width/2)) != i) ? "—" : 
+                                     (Math.round((width/2)) == i && Math.round((height/2)) != line) ? ' -- ' : (Math.floor((Math.random()*2)%2)) ? "╱" : "╲";
         }else{var s = (Math.round((width/2)) == i && Math.round((height/2)) == line) ? ' + ' : (Math.floor((Math.random()*2)%2)) ? "╱" : "╲";} 
     tag.appendChild(document.createTextNode(s));} 
     tag.appendChild(document.createElement('br'));
@@ -78,8 +78,8 @@ for(var line=1; line<height; line++){ //console.log(Math.round((width/2)));
 document.addEventListener('DOMContentLoaded', function(){
     let w = window.innerWidth / 16.3, head = document.getElementById('head'), foot = document.getElementById('foot');
     <?if('computer' == $device){?>
-        lab(head, 0, 20, w); lab(foot, 1, 20, w);
-        window.addEventListener("resize", (event) => {let w = window.innerWidth / 16.3; lab(head, 20, w); lab(foot, 20, w);});
+        lab(head, 0, 14, w); lab(foot, 1, 20, w);
+        window.addEventListener("resize", (event) => {let w = window.innerWidth / 16.3; lab(head, 14, w); lab(foot, 20, w);});
     <?}else{?>head.innerHTML='<br><br><br><br><br><br><br><br><br><br>'<?}?>
 });
 <?if('computer' == $device){?><?}?>
