@@ -1,0 +1,210 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме Алексей Моргун</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #007bff;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #555;
+        }
+        .header a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            color: #007bff;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 1.8em;
+        }
+        p, ul {
+            margin: 10px 0;
+            font-size: 1em;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section ul ul {
+            padding-left: 30px;
+        }
+        .section a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .section a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Алексей Моргун</h1>
+            <p>34 года | Email: ahilespelid@ya.ru | Телефон: +7 (989) 700-48-20 | Краснодар, Россия</p>
+            <p><a href="https://github.com/ahilespelid" target="_blank">GitHub: ahilespelid</a></p>
+        </div>
+
+        <div class="section">
+            <h2>О себе</h2>
+            <p>Опытный разработчик с 17-летним стажем в IT (с 2008 года), из них 8 лет (с 2017 года) — в коммерческой разработке. Участвовал в создании и поддержке крупных веб-проектов, включая корпоративные сайты, интернет-магазины и CRM-системы. Владею широким стеком технологий и инструментов для backend и frontend разработки, а также администрирования серверов. Ориентирован на результат, умею работать в команде и самостоятельно.</p>
+        </div>
+
+        <div class="section">
+            <h2>Навыки</h2>
+            <ul>
+                <li><strong>Backend:</strong> PHP (Laravel, Bitrix, Yii, ModX, CodeIgniter, OpenCart, WordPress, Joomla, Drupal), Python (Django, Flask), C# (Win32, Windows Forms), Node.js</li>
+                <li><strong>Frontend:</strong> JavaScript (jQuery, Angular, React, Bootstrap, React Native), CSS (Less, Sass), HTML (Smarty, Blade, Twig)</li>
+                <li><strong>Базы данных:</strong> SQL (MySQL, PostgreSQL, Oracle), NoSQL (MongoDB, Redis, Memcached)</li>
+                <li><strong>DevOps и инструменты:</strong> Docker, Bash, Bat, LAMP, LEMP, MEAN</li>
+                <li><strong>Прочее:</strong> Опыт работы с высоконагруженными системами, интеграция API, оптимизация производительности</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Опыт работы</h2>
+            <ul>
+                <li>
+                    <strong>Full-Stack Разработчик (Коммерческая разработка)</strong> — 2017 – настоящее время
+                    <ul>
+                        <li>Разработка и поддержка крупных веб-проектов, включая интернет-магазины, корпоративные сайты и CRM.</li>
+                        <li>Основные проекты:
+                            <ul>
+                                <li><a href="https://reklama-krasnodar.ru/" target="_blank">reklama-krasnodar.ru</a> — корпоративный сайт с интеграцией CRM.</li>
+                                <li><a href="https://z51.ru/" target="_blank">z51.ru</a> — интернет-магазин с Bitrix CMS.</li>
+                                <li><a href="https://www.woodmaker.ru/" target="_blank">woodmaker.ru</a> — cоциальная сеть компании на Laravel с каталогом продукции.</li>
+                                <li><a href="https://www.whitegoods.ru/" target="_blank">whitegoods.ru</a> — e-commerce платформа на OpenCart.</li>
+                                <li><a href="https://moskvaoptom.com/" target="_blank">moskvaoptom.com</a> — оптовая торговая платформа.</li>
+                            </ul>
+                        </li>
+                        <li>Разработка backend на PHP (Laravel, Bitrix, Yii) и Python (Django, Flask).</li>
+                        <li>Frontend-разработка с использованием React, Angular, jQuery, Bootstrap.</li>
+                        <li>Настройка и оптимизация серверов (LAMP, LEMP), контейнеризация (Docker).</li>
+                        <li>Интеграция с внешними API, оптимизация баз данных (MySQL, PostgreSQL, MongoDB).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>IT Специалист (Фриланс и личные проекты)</strong> — 2008 – 2017
+                    <ul>
+                        <li>Разработка небольших сайтов и приложений на PHP, JavaScript, Python, C#.</li>
+                        <li>Создание скриптов автоматизации (Bash, Bat).</li>
+                        <li>Изучение и эксперименты с различными технологиями (см. GitHub: <a href="https://github.com/ahilespelid" target="_blank">ahilespelid</a>).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Образование</h2>
+            <ul>
+                <li>
+                    <strong>Самообразование и практический опыт</strong> — 2008 – настоящее время
+                    <ul>
+                        <li>Глубокое изучение технологий через документацию, курсы и практические проекты.</li>
+                        <li>Регулярное обновление знаний о современных фреймворках и инструментах.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Дополнительно</h2>
+            <ul>
+                <li>Ведение open-source проектов на GitHub (<a href="https://github.com/ahilespelid" target="_blank">github.com/ahilespelid</a>).</li>
+                <li>Умение работать в условиях сжатых сроков и адаптироваться к новым задачам.</li>
+                <li>Готовность к переезду или удаленной работе.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
