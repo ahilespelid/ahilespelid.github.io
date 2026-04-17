@@ -1,217 +1,98 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резюме Алексей Моргун</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: #007bff;
-        }
-        .header p {
-            margin: 5px 0;
-            font-size: 1.1em;
-            color: #555;
-        }
-        .header a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .header a:hover {
-            text-decoration: underline;
-        }
-        h2 {
-            color: #007bff;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-            margin-top: 30px;
-            font-size: 1.8em;
-        }
-        p, ul {
-            margin: 10px 0;
-            font-size: 1em;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        ul li {
-            margin-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section ul ul {
-            padding-left: 30px;
-        }
-        .section a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .section a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            .header h1 {
-                font-size: 2em;
-            }
-            h2 {
-                font-size: 1.5em;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Квест: Найди разработчика • Алексей Моргун @ahilespelid</title>
+  <style>
+    body {
+      margin: 0; padding: 0; font-family: 'Courier New', monospace;
+      background: #0a0a0a; color: #00ff9d; line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .terminal {
+      max-width: 900px; margin: 40px auto; padding: 30px;
+      background: #111; border: 2px solid #00ff9d; box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+    }
+    h1 { font-size: 2.8em; text-align: center; margin-bottom: 10px; text-shadow: 0 0 10px #00ff9d; }
+    .subtitle { text-align: center; color: #00cc77; margin-bottom: 40px; }
+    .section { margin: 50px 0; }
+    .quest-title { color: #ffff00; font-size: 1.4em; margin: 30px 0 15px; }
+    ul { list-style: none; padding-left: 0; }
+    li { margin: 12px 0; position: relative; padding-left: 25px; }
+    li:before { content: "→"; color: #00ff9d; position: absolute; left: 0; }
+    .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+    .skill-tag {
+      background: #1a1a1a; padding: 8px 16px; border: 1px solid #00ff9d;
+      border-radius: 4px; font-size: 0.95em;
+    }
+    .footer {
+      text-align: center; margin-top: 80px; color: #00cc77; font-size: 0.9em;
+    }
+    a { color: #00ff9d; text-decoration: none; }
+    a:hover { text-decoration: underline; color: #ffff00; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Алексей Моргун</h1>
-            <p>34 года | Email: ahilespelid@ya.ru | Телефон: +7 (989) 700-48-20 | Краснодар, Россия</p>
-            <p><a href="https://github.com/ahilespelid" target="_blank">GitHub: ahilespelid</a></p>
-        </div>
+  <div class="terminal">
+    <h1>СИСТЕМА ЗАГРУЖЕНА</h1>
+    <p class="subtitle">Квест уровня: Middle PHP Developer<br>Имя: Алексей Моргун @ahilespelid (Abie)</p>
 
-        <div class="section">
-            <h2>О себе</h2>
-            <p>Опытный разработчик с 17-летним стажем в IT (с 2008 года), из них 8 лет (с 2017 года) — в коммерческой разработке. Участвовал в создании и поддержке крупных веб-проектов, включая корпоративные сайты, интернет-магазины и CRM-системы. Владею широким стеком технологий и инструментов для backend и frontend разработки, а также администрирования серверов. Ориентирован на результат, умею работать в команде и самостоятельно.</p>
-        </div>
-
-        <div class="section">
-            <h2>Навыки</h2>
-            <ul>
-                <li><strong>Backend:</strong> PHP (Laravel, Bitrix, Yii, ModX, CodeIgniter, OpenCart, WordPress, Joomla, Drupal), Python (Django, Flask), C# (Win32, Windows Forms), Node.js</li>
-                <li><strong>Frontend:</strong> JavaScript (jQuery, Angular, React, Bootstrap, React Native), CSS (Less, Sass), HTML (Smarty, Blade, Twig)</li>
-                <li><strong>Базы данных:</strong> SQL (MySQL, PostgreSQL, Oracle), NoSQL (MongoDB, Redis, Memcached)</li>
-                <li><strong>DevOps и инструменты:</strong> Docker, Bash, Bat, LAMP, LEMP, MEAN</li>
-                <li><strong>Прочее:</strong> Опыт работы с высоконагруженными системами, интеграция API, оптимизация производительности</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Опыт работы</h2>
-            <ul>
-                <li>
-                    <strong>Full-Stack Разработчик (Коммерческая разработка)</strong> — 2017 – настоящее время
-                    <ul>
-                        <li>Разработка и поддержка крупных веб-проектов, включая интернет-магазины, корпоративные сайты и CRM.</li>
-                        <li>Основные проекты:
-                            <ul>
-                                <li><a href="https://reklama-krasnodar.ru/" target="_blank">reklama-krasnodar.ru</a> — корпоративный сайт с интеграцией CRM.</li>
-                                <li><a href="https://z51.ru/" target="_blank">z51.ru</a> — интернет-магазин с Bitrix CMS.</li>
-                                <li><a href="https://www.woodmaker.ru/" target="_blank">woodmaker.ru</a> — cоциальная сеть компании на Laravel с каталогом продукции.</li>
-                                <li><a href="https://www.whitegoods.ru/" target="_blank">whitegoods.ru</a> — e-commerce платформа на OpenCart.</li>
-                                <li><a href="https://moskvaoptom.com/" target="_blank">moskvaoptom.com</a> — оптовая торговая платформа.</li>
-                            </ul>
-                        </li>
-                        <li>Разработка backend на PHP (Laravel, Bitrix, Yii) и Python (Django, Flask).</li>
-                        <li>Frontend-разработка с использованием React, Angular, jQuery, Bootstrap.</li>
-                        <li>Настройка и оптимизация серверов (LAMP, LEMP), контейнеризация (Docker).</li>
-                        <li>Интеграция с внешними API, оптимизация баз данных (MySQL, PostgreSQL, MongoDB).</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>IT Специалист (Фриланс и личные проекты)</strong> — 2008 – 2025
-                    <ul>
-                        <li>Разработка небольших сайтов и приложений на PHP, JavaScript, Python, C#.</li>
-                        <li>Создание скриптов автоматизации (Bash, Bat).</li>
-                        <li>Изучение и эксперименты с различными технологиями (см. GitHub: <a href="https://github.com/ahilespelid" target="_blank">ahilespelid</a>).</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>Проявлею активность в развитии языка PHP и его популярных CMS</strong> — 2020 – 2025
-                    <ul>
-                        <li><a href="https://github.com/php/web-php/compare/master...ahilespelid:web-php:patch-1" target="_blank">https://github.com/php/web-php/pull/1308</a></li>
-                        <li><a href="https://github.com/bitrix24/b24phpsdk/issues/108" target="_blank">https://github.com/bitrix24</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Образование</h2>
-            <ul>
-                <li>
-                    <strong>Самообразование и практический опыт</strong> — 2008 – настоящее время
-                    <ul>
-                        <li>Глубокое изучение технологий через документацию, курсы и практические проекты.</li>
-                        <li>Регулярное обновление знаний о современных фреймворках и инструментах.</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Дополнительно</h2>
-            <ul>
-                <li>Ведение open-source проектов на GitHub (<a href="https://github.com/ahilespelid" target="_blank">github.com/ahilespelid</a>).</li>
-                <li>Умение работать в условиях сжатых сроков и адаптироваться к новым задачам.</li>
-                <li>Готовность к переезду или удаленной работе.</li>
-            </ul>
-        </div>
+    <div class="section">
+      <h2 class="quest-title">📍 Миссия</h2>
+      <p>Опытный PHP-разработчик, который любит чистый код, автоматизацию и сложные задачи. Ищу проект, где можно прокачать навыки и принести реальную пользу.</p>
     </div>
+
+    <div class="section">
+      <h2 class="quest-title">🛠️ Стек навыков (пройденные уровни)</h2>
+      <div class="skills">
+        <span class="skill-tag">PHP 8 • Laravel</span>
+        <span class="skill-tag">MySQL • PostgreSQL</span>
+        <span class="skill-tag">REST API • Интеграции</span>
+        <span class="skill-tag">Git • Linux • Nginx</span>
+        <span class="skill-tag">Bitrix D7</span>
+        <span class="skill-tag">OpenCart</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">CScart</span>
+        <span class="skill-tag">ModX</span>
+        <span class="skill-tag">Drupal</span>
+        <span class="skill-tag">React + Inertia</span>
+        <span class="skill-tag">Python (автоматизация)</span>
+        <span class="skill-tag">Shell • Batchfile</span>
+        <span class="skill-tag">C# (desktop)</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="quest-title">📂 Пройденные квесты (Проекты)</h2>
+      <ul>
+        <li><strong>teptar</strong> — госзадание Middle PHP Developer</li>
+        <li><strong>komplektoff_54</strong> — ремонт компьютеров и ноутбуков в Новосибирске</li>
+        <li><strong>LaravelReactInertia_createProjectScript</strong> — скрипт быстрого создания проектов Laravel + React + Inertia</li>
+        <li><strong>WindowsFlattenFolder</strong> — утилита для выпрямления папок (Batch)</li>
+        <li><strong>window_locker_custom</strong> — кастомное приложение для управления окнами с автокомпилятором (C#)</li>
+        <li><strong>open_cart_hack</strong> — доработки и хаки OpenCart</li>
+        <li><strong>BitrixLocalInitFile</strong> — инструменты для локальной разработки Bitrix</li>
+        <li><strong>functions</strong> — коллекция полезных PHP-функций</li>
+        <li><strong>BitrixDeliveryHandlre_Esey-Bulky</strong>, <strong>BitrixDeliveryRestrictedDeliveryByProductInStore</strong> — обработчики доставки Bitrix</li>
+        <li><strong>web-php</strong> — форк официального сайта php.net</li>
+        <li><strong>ahilespelid.github.io</strong> — этот самый квест-лендинг</li>
+        <li>и ещё 35+ проектов (Bitrix, API интеграции, игры, сайты)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="quest-title">🎯 Особые достижения</h2>
+      <p>→ Участвовал в тестировании и находил баги в официальном <strong>Google Gemini PHP Client</strong><br>
+         → Создаю удобные инструменты автоматизации для разработчиков<br>
+         → Быстро разбираюсь в legacy-коде и довожу его до современного состояния</p>
+    </div>
+
+    <div class="footer">
+      <p>Готов начать новый квест.<br>
+      Пиши: <a href="https://t.me/ahilespelid">@ahilespelid</a> в Telegram</p>
+      <p style="margin-top: 30px; font-size: 0.8em;">Система ждёт твоего следующего действия...</p>
+    </div>
+  </div>
 </body>
 </html>
